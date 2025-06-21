@@ -1,4 +1,4 @@
-export function ProductsShow ({ product, onUpdate }) {
+export function ProductsShow ({ product, onUpdate , onDestroy }) {
   const handleSubmit = (event) => {
     event.preventDefault();
     const form = event.target;
@@ -24,6 +24,7 @@ export function ProductsShow ({ product, onUpdate }) {
         </div>
         <button type="submit">Update</button>
       </form>
+      <button onClick={() => onDestroy(product)}>Delete</button>
     </div>
   )
 }
