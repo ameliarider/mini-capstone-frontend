@@ -1,20 +1,25 @@
 import axios from "axios";
 import { useState } from "react";
+import { useNavigate, useOutletContext } from "react-router-dom";
 
 export function LoginPage() {
   const [errors, setErrors] = useState([]);
+  const navigate = useNavigate();
+  const { setIsLoggedIn } = useOutletContext();
 
   const handleSubmit = (event) => {
     event.preventDefault();
     setErrors([]);
     const params = new FormData(event.target);
+    console.log(params);
     axios
       .post("http://localhost:3000/login", params)
       .then((response) => {
         console.log(response.data);
         localStorage.setItem("email", response.data.email);
+        setIsLoggedIn(true);
         event.target.reset();
-        window.location.reload(); // Refresh page to update login state
+        navigate("/");
       })
       .catch((error) => {
         console.log(error.response);
@@ -30,7 +35,7 @@ export function LoginPage() {
           <li key={error}>{error}</li>
         ))}
       </ul>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} >
         <div>
           Email: <input name="email" type="email" />
         </div>

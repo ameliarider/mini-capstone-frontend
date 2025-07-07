@@ -1,55 +1,27 @@
-import { useState } from "react";
-import { SignupPage } from "./SignupPage";
-import { LoginPage } from "./LoginPage";
+import { CartedProductsPage } from "./CartedProductsPage";
 import { LogoutLink } from "./LogoutLink";
+import { Link } from "react-router-dom";
 
-export function Header() {
-  const [showSignup, setShowSignup] = useState(false);
-  const [showLogin, setShowLogin] = useState(false);
-  // // Convert “is there an 'email' key in localStorage?” into a true/false value for the initial logged-in state.
-  const [isLoggedIn] = useState(!!localStorage.getItem("email"));
+export function Header({ isLoggedIn, setIsLoggedIn }) {
 
-  const handleSignupClick = () => {
-    setShowSignup(!showSignup);
-    setShowLogin(false);
-  };
-
-  const handleLoginClick = () => {
-    setShowLogin(!showLogin);
-    setShowSignup(false);
-  };
-
-  return (
+return (
     <header>
       <nav>
         <div>
-          <h1>Storefront</h1><br /><br />
+          <Link to="/">Storefront</Link> | <Link to="/products">Products</Link>
           <div>
             {isLoggedIn ? (
-              <LogoutLink />
+              <>
+                <LogoutLink setIsLoggedIn={setIsLoggedIn} /> | <Link to="/cart">Cart</Link>
+              </>
             ) : (
               <>
-                <button onClick={handleSignupClick}>
-                  {showSignup ? "Hide Signup" : "Sign Up"}
-                </button>
-                <button onClick={handleLoginClick}>
-                  {showLogin ? "Hide Login" : "Login"}
-                </button>
+                <Link to="/signup">Sign Up</Link> | <Link to="/login">Login</Link>
               </>
             )}
           </div>
         </div>
       </nav>
-      {showSignup && (
-        <div>
-          <SignupPage />
-        </div>
-      )}
-      {showLogin && (
-        <div>
-          <LoginPage />
-        </div>
-      )}
     </header>
   );
 }

@@ -1,8 +1,10 @@
 import axios from "axios";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export function SignupPage() {
   const [errors, setErrors] = useState([]);
+  const navigate = useNavigate();
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -13,7 +15,7 @@ export function SignupPage() {
     .then((response) => {
       console.log(response.data);
       event.target.reset();
-      window.location.reload();
+      navigate("/");
     })
     .catch((error) => {
       console.log(error.response.data.errors);

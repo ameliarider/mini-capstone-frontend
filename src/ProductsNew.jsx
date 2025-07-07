@@ -9,6 +9,7 @@ export function ProductsNew ({ onCreate }) {
 
   return (
     <div>
+      <h1>New Product</h1>
       <form onSubmit={handleSubmit}>
         <div>
           Name: <input name="name" type="text" />
@@ -22,6 +23,7 @@ export function ProductsNew ({ onCreate }) {
         <div>
           Supplier: <input name="supplier_id" type="integer" defaultValue={1} />
         </div>
+        <button type="submit">Create</button>
       </form>
     </div>
   )
