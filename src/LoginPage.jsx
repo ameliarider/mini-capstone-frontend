@@ -35,14 +35,14 @@ export function LoginPage() {
           <li key={error}>{error}</li>
         ))}
       </ul>
-      <form onSubmit={handleSubmit} >
-        <div>
-          Email: <input name="email" type="email" />
+      <form className="form-floating mb-3" onSubmit={handleSubmit} >
+        <div className="form-floating">
+          Email: <input className="form-control" id="floatingInput" name="email" type="email" />
         </div>
-        <div>
-          Password: <input name="password" type="password" />
-        </div>
-        <button type="submit">Login</button>
+        <div className="form-floating">
+          Password: <input className="form-control" id="floatingPassword" name="password" type="password" />
+        </div><br />
+        <button type="submit" className="btn btn-primary">Login</button>
       </form>
     </div>
   );
