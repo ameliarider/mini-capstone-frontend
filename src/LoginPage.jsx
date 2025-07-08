@@ -13,7 +13,7 @@ export function LoginPage() {
     const params = new FormData(event.target);
     console.log(params);
     axios
-      .post("http://localhost:3000/login", params)
+      .post("/login", params)
       .then((response) => {
         console.log(response.data);
         localStorage.setItem("email", response.data.email);
