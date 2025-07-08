@@ -3,6 +3,7 @@ import { ProductsNew } from './ProductsNew'
 import { useState, useEffect } from "react";
 import { Modal } from './Modal';
 import { ProductsShow } from './ProductsShow'
+import { useOutletContext } from "react-router-dom";
 import axios from 'axios';
 
 axios.defaults.withCredentials = true;
@@ -12,6 +13,7 @@ export function ProductsPage() {
   const [isProductsShowVisible, setIsProductsShowVisible] = useState(false);
   const [currentProduct, setCurrentProduct] = useState({});
   const [cart, setCart] = useState([]);
+  const { isLoggedIn } = useOutletContext();
   // const [errors, setErrors] = useState([]);
 
   const handleIndex = () => {
@@ -80,7 +82,7 @@ export function ProductsPage() {
 
   return (
     <main>
-      <ProductsIndex products={products} onShow={handleShow} onCart={handleCartedProduct} />
+      <ProductsIndex products={products} onShow={handleShow} onCart={handleCartedProduct} isLoggedIn={isLoggedIn} />
       <Modal show={isProductsShowVisible} onClose={() => setIsProductsShowVisible(false)}>
         <ProductsShow product={currentProduct} onUpdate={handleUpdate} onDestroy={handleDestroy} />
       </Modal>

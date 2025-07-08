@@ -1,4 +1,4 @@
-export function ProductsIndex({ products, onShow, onCart }) {
+export function ProductsIndex({ products, onShow, onCart, isLoggedIn }) {
   return (
     <div className="container my-4">
       <h2 className="mb-3">Products</h2>
@@ -24,12 +24,14 @@ export function ProductsIndex({ products, onShow, onCart }) {
                   >
                     More Info
                   </button>
-                  <button
-                    className="btn btn-primary"
-                    onClick={() => onCart(product)}
-                  >
-                    Add to Cart
-                  </button>
+                  {isLoggedIn && (
+                      <button
+                        className="btn btn-primary"
+                        onClick={() => onCart(product)}
+                      >
+                        Add to Cart
+                      </button>
+                  )}
                 </div>
               </div>
             </div>

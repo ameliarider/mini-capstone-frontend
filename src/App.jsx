@@ -28,6 +28,7 @@ function Layout() {
     <div>
 <Header isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
 <Outlet context={{ 
+        isLoggedIn,
         setIsLoggedIn
       }} />
 <Footer />
