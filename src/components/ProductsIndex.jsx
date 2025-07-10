@@ -7,7 +7,12 @@ export function ProductsIndex({ products, onShow, onCart, isLoggedIn }) {
     <div className="container my-4">
       <h2 className="mb-3">Products</h2>
       <p>Total products: {products.length}</p>
-      Search Filter: <input type="text" value={searchFilter} onChange={(event) => setSearchFilter(event.target.value) } /><br />
+      Search Filter: <input type="text" value={searchFilter} onChange={(event) => setSearchFilter(event.target.value)} list="names" /><br />
+      <datalist id="names">
+        {products.map((product) => (
+          <option key={product.id} value={product.name} />
+        ))}
+      </datalist><br />
       <div className="row g-4"> {/* g-4 adds gutter (spacing) between cards */}
         {products
         .filter((product) => product.name.toLowerCase().includes(searchFilter.toLowerCase()))
