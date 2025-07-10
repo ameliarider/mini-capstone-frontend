@@ -4,15 +4,15 @@ import { useState, useEffect } from 'react';
 import "bootstrap/dist/css/bootstrap.min.css";  // ← Bootstrap
 import "./index.css";
 
-import { Header } from './Header'
-import { HomePage } from './HomePage';
-import { SignupPage } from "./SignupPage";
-import { LoginPage } from "./LoginPage";
-import { ProductsPage } from './ProductsPage'
-import { Footer } from './Footer'
-import { CartedProductsPage } from "./CartedProductsPage"
-import { Orders } from './Orders';
-import { OrderConfirmation } from './OrderConfirmation';
+import { Header } from './components/Header'
+import { HomePage } from './components/HomePage';
+import { SignupPage } from "./components/SignupPage";
+import { LoginPage } from "./components/LoginPage";
+import { ProductsPage } from './components/ProductsPage'
+import { Footer } from './components/Footer'
+import { CartedProductsPage } from "./components/CartedProductsPage"
+import { Orders } from './components/Orders';
+import { OrderConfirmation } from './components/OrderConfirmation';
 
 axios.defaults.baseURL = "http://localhost:3000";
 axios.defaults.withCredentials = true;
