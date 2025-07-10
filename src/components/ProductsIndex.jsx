@@ -1,10 +1,17 @@
+import { useState } from "react";
+
 export function ProductsIndex({ products, onShow, onCart, isLoggedIn }) {
+  const [searchFilter, setSearchFilter] = useState("");
+
   return (
     <div className="container my-4">
       <h2 className="mb-3">Products</h2>
       <p>Total products: {products.length}</p>
+      Search Filter: <input type="text" value={searchFilter} onChange={(event) => setSearchFilter(event.target.value) } /><br />
       <div className="row g-4"> {/* g-4 adds gutter (spacing) between cards */}
-        {products.map((product) => (
+        {products
+        .filter((product) => product.name.toLowerCase().includes(searchFilter.toLowerCase()))
+        .map((product) => (
           <div key={product.id} className="col-sm-6 col-md-4">
             <div className="card h-100">
               <img

@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 export function SignupPage() {
   const [errors, setErrors] = useState([]);
   const [name, setName] = useState("");
+  const [status, setStatus] = useState(null); 
   const navigate = useNavigate();
 
   const handleSubmit = (event) => {
@@ -19,14 +20,16 @@ export function SignupPage() {
       navigate("/login");
     })
     .catch((error) => {
-      console.log(error.response.data.errors);
+      console.log(error.response.status);
       setErrors(error.response.data.errors);
+      setStatus(error.response.status)
     });
   };
 
   return (
     <div id="signup">
       <h1>Signup</h1>
+      {status ? <img width="40%" height="40%"  src={`https://http.dog/${status}.jpg`} /> : null}
       <ul>
         {errors.map((error) => (
           <li key={error}>{error}</li>
