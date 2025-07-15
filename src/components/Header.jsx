@@ -14,7 +14,9 @@ return (
             <div className="nav">
               {isLoggedIn ? (
                 <>
-                  <li><Link className="nav-link active" to="/cart">Cart</Link></li> <li><LogoutLink  setIsLoggedIn={setIsLoggedIn} /></li>
+                  <li><Link className="nav-link active" to="/cart">Cart</Link></li>
+                  <li><Link className="nav-link active" to="/orders">Orders</Link></li> 
+                  <li><LogoutLink  setIsLoggedIn={setIsLoggedIn} /></li>
                 </>
               ) : (
                 <>

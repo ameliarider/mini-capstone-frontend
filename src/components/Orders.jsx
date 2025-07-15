@@ -5,6 +5,7 @@ import axios from "axios";
 export function Orders() {
   const [orders, setOrders] = useState([]);
   const [searchFilter, setSearchFilter] = useState("");
+  const [sort, setSort] = useState("");
 
   const handleIndex = () => {
     console.log("handleIndex");
@@ -22,9 +23,27 @@ export function Orders() {
     <main>
       <h1>Your Orders</h1>
       <p>You have {orders.length} orders</p>
-      Search filter: <input type="integer" value={searchFilter} onChange={(event) => setSearchFilter(event.target.value)} />
+      Search filter: <input type="integer" value={searchFilter} onChange={(event) => setSearchFilter(event.target.value)} list="ids" />
+      <datalist id="ids">
+        {orders.map((order) => (
+          <option key={order.id} value={order.id}></option>
+        ))}
+      </datalist><br />
+      Sort by: <select value={sort} onChange={(event) => setSort(event.target.value)}>
+        <option value="">None</option>
+        <option value="0-100">Total: High to Low</option>
+        <option value="100-0">Total: Low to High</option>
+      </select>
       {orders
         .filter((order) => order.id.toString().includes(searchFilter))
+        .sort((a, b) => {
+          if (sort === "100-0") {
+            return a.total.localeCompare(b.total);
+          } else if (sort === "0-100") {
+            return b.total.localeCompare(a.total);
+          }
+          return 0;
+        })
         .map((order) => (
           <div key={order.id}>
             <h3>Order #{order.id}</h3>

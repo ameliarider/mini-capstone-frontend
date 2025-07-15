@@ -7,7 +7,8 @@ export function CartedProductsIndex({cartedProducts, onDestroy}) {
         <div key={product.id}>
           <p>{product.name} | Quantity: {product.quantity}</p>
           <p>${product.price} each</p>
-          <button onClick={() => onDestroy(product)}>Remove from Cart</button>
+          <button onClick={() => onDestroy(product)}>Remove from Cart</button><br />
+          <button>Update Quantity</button>
           <p>----------------</p>
         </div>
       ))}

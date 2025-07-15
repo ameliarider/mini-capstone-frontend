@@ -2,6 +2,11 @@ import { useState } from "react";
 
 export function ProductsIndex({ products, onShow, onCart, isLoggedIn }) {
   const [searchFilter, setSearchFilter] = useState("");
+  const [sort, setSort] = useState("false");
+  // const sortAlphabetically = () => {
+  //   const sortedProducts = [...products].sort((a, b) => a.name.localeCompare(b.name));
+  //     products(sortedProducts);
+  // };
 
   return (
     <div className="container my-4">
@@ -10,12 +15,27 @@ export function ProductsIndex({ products, onShow, onCart, isLoggedIn }) {
       Search Filter: <input type="text" value={searchFilter} onChange={(event) => setSearchFilter(event.target.value)} list="names" /><br />
       <datalist id="names">
         {products.map((product) => (
-          <option key={product.id} value={product.name} />
+        <option key={product.id} value={product.name} />
         ))}
-      </datalist><br />
+      </datalist>
+
+      Sort by:
+      <select value={sort} onChange={(event) => setSort(event.target.value)}>
+        <option value="">None</option>
+        <option value="a-z">A-Z</option>
+        <option value="z-a">Z-A</option>
+      </select><br /><br />
       <div className="row g-4"> {/* g-4 adds gutter (spacing) between cards */}
         {products
         .filter((product) => product.name.toLowerCase().includes(searchFilter.toLowerCase()))
+        .sort((a, b) => {
+          if (sort === "a-z") {
+            return a.name.localeCompare(b.name);
+          } else if (sort === "z-a") {
+            return b.name.localeCompare(a.name);
+          }
+          return 0;
+        })
         .map((product) => (
           <div key={product.id} className="col-sm-6 col-md-4">
             <div className="card h-100">
