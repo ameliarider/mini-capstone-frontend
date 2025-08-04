@@ -9,6 +9,7 @@ import { HomePage } from './components/HomePage';
 import { SignupPage } from "./components/SignupPage";
 import { LoginPage } from "./components/LoginPage";
 import { ProductsPage } from './components/ProductsPage'
+import { ProductsNew } from "./components/ProductsNew";
 import { Footer } from './components/Footer'
 import { CartedProductsPage } from "./components/CartedProductsPage"
 import { Orders } from './components/Orders';
@@ -19,6 +20,10 @@ axios.defaults.withCredentials = true;
 
 function Layout() {
   const [ isLoggedIn, setIsLoggedIn ] = useState(!!localStorage.getItem("email"));
+  const [isAdmin, setIsAdmin] = useState(() => {
+  const stored = localStorage.getItem("isAdmin");
+  return stored === "true"; // Convert string to boolean
+});
 
   useEffect(() => {
     setIsLoggedIn(!!localStorage.getItem("email"));
@@ -26,10 +31,12 @@ function Layout() {
 
   return (
     <div>
-<Header isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+<Header isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} isAdmin={isAdmin} />
 <Outlet context={{ 
         isLoggedIn,
-        setIsLoggedIn
+        setIsLoggedIn,
+        isAdmin,
+        setIsAdmin
       }} />
 <Footer />
     </div>
@@ -68,6 +75,10 @@ const router = createBrowserRouter([
       {
         path: "/orderconfirmation",
         element: <OrderConfirmation />
+      },
+      {
+        path: "/newproduct",
+        element: <ProductsNew />
       }
     ],
   },

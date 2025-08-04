@@ -1,5 +1,4 @@
 import { ProductsIndex } from './ProductsIndex'
-import { ProductsNew } from './ProductsNew'
 import { useState, useEffect } from "react";
 import { Modal } from './Modal';
 import { ProductsShow } from './ProductsShow'
@@ -14,6 +13,7 @@ export function ProductsPage() {
   const [currentProduct, setCurrentProduct] = useState({});
   const [cart, setCart] = useState([]);
   const { isLoggedIn } = useOutletContext();
+  const { isAdmin } = useOutletContext();
   // const [errors, setErrors] = useState([]);
 
   const handleIndex = () => {
@@ -30,17 +30,6 @@ export function ProductsPage() {
   };
 
   useEffect(handleIndex, []);
-
-  const handleCreate = (params, successCallback) => {
-    axios.post("/products.json", params).then((response) => {
-      setProducts([...products, response.data]);
-      successCallback();
-    })
-    .catch((error) => {
-      console.log(error.response.data.errors);
-      // setErrors(error.response.data.errors);
-    });
-  }
 
   const handleCartedProduct = (product) => {
     const params = {
@@ -84,9 +73,8 @@ export function ProductsPage() {
     <main>
       <ProductsIndex products={products} onShow={handleShow} onCart={handleCartedProduct} isLoggedIn={isLoggedIn} />
       <Modal show={isProductsShowVisible} onClose={() => setIsProductsShowVisible(false)}>
-        <ProductsShow product={currentProduct} onUpdate={handleUpdate} onDestroy={handleDestroy} />
+        <ProductsShow product={currentProduct} onUpdate={handleUpdate} onDestroy={handleDestroy} isLoggedIn={isLoggedIn} isAdmin={isAdmin} />
       </Modal>
-      <ProductsNew onCreate={handleCreate} />
     </main>
   )
 }

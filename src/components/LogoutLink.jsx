@@ -9,6 +9,7 @@ export function LogoutLink({ setIsLoggedIn}) {
     axios.delete("/logout").then((response) => {
       console.log(response);
       localStorage.removeItem("email");
+      localStorage.removeItem("isAdmin");
       setIsLoggedIn(false);
       navigate("/");
     });

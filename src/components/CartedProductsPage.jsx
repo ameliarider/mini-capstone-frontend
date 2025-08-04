@@ -26,14 +26,6 @@ export function CartedProductsPage() {
   };
 
   useEffect(handleIndex, []);
-
-  // const handleUpdate = (product, params, successCallback) => {
-  //   axios.patch(`/cart/${product.id}.json`, params).then((response) => {
-  //     setCartedProducts(cartedProducts.map(p => p.id === response.data.id ? response.data :p))
-  //     successCallback();
-  //   })
-  // }
-
   const handleCreateOrder = (product) => {
     const params = {
       user_id: product.user_id

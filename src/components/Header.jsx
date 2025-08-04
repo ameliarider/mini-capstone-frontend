@@ -2,10 +2,10 @@ import { CartedProductsPage } from "./CartedProductsPage";
 import { LogoutLink } from "./LogoutLink";
 import { Link } from "react-router-dom";
 
-export function Header({ isLoggedIn, setIsLoggedIn }) {
+export function Header({ isLoggedIn, setIsLoggedIn, isAdmin }) {
 
 return (
-    <header className="p-3 mb-2 bg-primary-subtle text-primary-emphasis">
+    <header className="p-3 mb-2 text-primary-emphasis" style={{ backgroundColor: "#94D7FF" }}>
       <nav className="nav">
         <ul className="nav">
           <div className="nav">
@@ -16,7 +16,13 @@ return (
                 <>
                   <li><Link className="nav-link active" to="/cart">Cart</Link></li>
                   <li><Link className="nav-link active" to="/orders">Orders</Link></li> 
-                  <li><LogoutLink  setIsLoggedIn={setIsLoggedIn} /></li>
+
+                  {/* ✅ Admin-only link */}
+                  {isAdmin && (
+                    <li><Link className="nav-link active" to="/newproduct">(Admin Only) Add Product</Link></li>
+                  )}
+
+                  <li><LogoutLink setIsLoggedIn={setIsLoggedIn} /></li>
                 </>
               ) : (
                 <>

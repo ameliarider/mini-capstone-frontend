@@ -5,7 +5,7 @@ import { useNavigate, useOutletContext } from "react-router-dom";
 export function LoginPage() {
   const [errors, setErrors] = useState([]);
   const navigate = useNavigate();
-  const { setIsLoggedIn } = useOutletContext();
+  const { setIsLoggedIn, setIsAdmin } = useOutletContext();
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -17,7 +17,9 @@ export function LoginPage() {
       .then((response) => {
         console.log(response.data);
         localStorage.setItem("email", response.data.email);
+        localStorage.setItem("isAdmin", response.data.admin);
         setIsLoggedIn(true);
+        setIsAdmin(response.data.admin);
         event.target.reset();
         navigate("/");
       })
